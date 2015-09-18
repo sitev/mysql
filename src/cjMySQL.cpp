@@ -26,11 +26,11 @@ namespace cj {
 	bool MySQL::connect(String host, String user, String password, String db) {
 		application->logger_out("MySQL connect");
 		try {
-			string host8 = host.toString8();
-			string user8 = user.toString8();
-			string pswd8 = password.toString8();
-			string db8 = db.toString8();
-			if (!mysql_real_connect(conn, host.toString8().c_str(), user.toString8().c_str(), password.toString8().c_str(), db.toString8().c_str(), NULL, NULL, 0)) {
+			string host8 = host.to_string();
+			string user8 = user.to_string();
+			string pswd8 = password.to_string();
+			string db8 = db.to_string();
+			if (!mysql_real_connect(conn, host.to_string().c_str(), user.to_string().c_str(), password.to_string().c_str(), db.to_string().c_str(), NULL, NULL, 0)) {
 				String error = mysql_error(conn);
 				application->logger_out("Error: can't connect to database");
 				return false;
@@ -45,14 +45,14 @@ namespace cj {
 	}
 	bool MySQL::query(String sql) {
 		if (res != NULL) mysql_free_result(res);
-		if (mysql_query(conn, sql.toString8().c_str()) != 0) {
+		if (mysql_query(conn, sql.to_string().c_str()) != 0) {
 			application->logger_out("Error: mistake in SQL");
 			return false;
 		}
 		return true;
 	}
 	bool MySQL::exec(String sql) {
-		if (mysql_query(conn, sql.toString8().c_str()) != 0)
+		if (mysql_query(conn, sql.to_string().c_str()) != 0)
 		{
 			return false;
 		}
@@ -83,7 +83,7 @@ namespace cj {
 		int len = s.getLength();
 		char *res = (char*)malloc(len * 2 + 1);
 		//MYSQL *mysql, char *to,const char *from, unsigned long length
-		mysql_real_escape_string(conn, res, s.toString8().c_str(), len);
+		mysql_real_escape_string(conn, res, s.to_string().c_str(), len);
 		String sRes = res;
 		free(res);
 
@@ -121,18 +121,18 @@ namespace cj {
 		}
 		return "";
 	}
-	String MySQL::getLastId() {
+	int MySQL::getLastId() {
 		String sql = "select LAST_INSERT_ID();";
 		if (this->exec(sql)) {
 			if (this->storeResult()) {
 				int count = this->getRowCount();
 				if (count > 0) {
 					String lastSiteId = this->getFieldValue(0, "LAST_INSERT_ID()");
-					return lastSiteId;
+					return lastSiteId.toInt();
 				}
 			}
 		}
-		return "";
+		return 0;
 	}
 
 }

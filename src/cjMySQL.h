@@ -36,7 +36,7 @@ namespace cj {
 		virtual String getFieldValue(int rowIndex, int fieldIndex);
 		virtual String getFieldValue(int rowIndex, String fieldName);
 
-		virtual String getLastId();
+		virtual int getLastId();
 	};
 
 }
