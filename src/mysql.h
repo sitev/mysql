@@ -5,7 +5,7 @@ using namespace core;
 
 namespace mysql {
 
-#include <mysqlconn.h>
+#include <../include/mysql.h>
 
 #ifdef OS_WINDOWS
 	#pragma comment (lib, "libmysql.lib")
