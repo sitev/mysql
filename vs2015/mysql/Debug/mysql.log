@@ -1,0 +1,7 @@
+﻿  mysql.cpp
+c:\projects\core\src\strings.h(60): warning C4521: 'core::Str': multiple copy constructors specified
+c:\projects\core\src\strings.h(119): warning C4521: 'core::String': multiple copy constructors specified
+c:\projects\core\src\logger.h(48): warning C4005: 'LOGGER_OUT': macro redefinition
+  c:\projects\core\src\logger.h(47): note: see previous definition of 'LOGGER_OUT'
+c:\projects\mysql\src\mysql.cpp(102): warning C4244: 'return': conversion from 'mysql::my_ulonglong' to 'int', possible loss of data
+  mysql.vcxproj -> C:\projects\cms\vs2015\cms\Debug\mysql.lib
