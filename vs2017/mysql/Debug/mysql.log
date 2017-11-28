@@ -1,0 +1,7 @@
+﻿  mysql.cpp
+c:\projects\core\src\strings.h(60): warning C4521: core::Str: заданы несколько конструкторов копии
+c:\projects\core\src\strings.h(119): warning C4521: core::String: заданы несколько конструкторов копии
+c:\projects\core\src\logger.h(48): warning C4005: LOGGER_OUT: изменение макроопределения
+  c:\projects\core\src\logger.h(47): note: см. предыдущее определение "LOGGER_OUT"
+c:\projects\mysql\src\mysql.cpp(102): warning C4244: return: преобразование "mysql::my_ulonglong" в "int", возможна потеря данных
+  mysql.vcxproj -> C:\projects\mysql\vs2017\mysql\Debug\mysql.lib
