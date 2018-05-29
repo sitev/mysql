@@ -2,20 +2,25 @@
 
 #include "core.h"
 using namespace core;
+#include "logger.h"
 
 namespace mysql {
 
-#include <../include/mysql.h>
+//#include <../include/mysql.h>
+#include <C:\projects\lib\mysqlconn\include\mysql.h>
 
 #ifdef OS_WINDOWS
-	#pragma comment (lib, "libmysql.lib")
+    //#pragma comment (lib, "libmysql.lib")
 #endif
 
 
 	class MySQL : public Object {
+	protected:
 		MYSQL *conn;
 		MYSQL_RES *res;
 		MYSQL_FIELD *fields;
+
+		logger::Logger *logger;
 	public:
 		MySQL();
 		~MySQL();

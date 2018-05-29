@@ -9,6 +9,8 @@ namespace mysql {
 		conn = NULL;
 		res = NULL;
 		fields = NULL;
+
+		logger = new logger::Logger("mysql.log");
 	}
 	MySQL::~MySQL() {
 		if (res != NULL) mysql_free_result(res);
@@ -17,14 +19,14 @@ namespace mysql {
 	bool MySQL::init() {
 		conn = mysql_init(NULL);
 		if (conn == NULL) {
-			application->logger_out("Error: can't create MySQL-descriptor");
+			logger->out("Error: can't create MySQL-descriptor");
 			return false;
 		}
-		application->logger_out("MySQL-descriptor was created!");
+		logger->out("MySQL-descriptor was created!");
 		return true;
 	}
 	bool MySQL::connect(String host, String user, String password, String db) {
-		application->logger_out("MySQL connect");
+		logger->out("MySQL connect");
 		try {
 			string host8 = host.to_string();
 			string user8 = user.to_string();
@@ -32,21 +34,21 @@ namespace mysql {
 			string db8 = db.to_string();
 			if (!mysql_real_connect(conn, host.to_string().c_str(), user.to_string().c_str(), password.to_string().c_str(), db.to_string().c_str(), NULL, NULL, 0)) {
 				String error = mysql_error(conn);
-				application->logger_out("Error: can't connect to database");
+				logger->out("Error: can't connect to database");
 				return false;
 			}
 		}
 		catch (...) {
-			application->logger_out("connect catch");
+			logger->out("connect catch");
 			return false;
 		}
-		application->logger_out("Connected to database!");
+		logger->out("Connected to database!");
 		return true;
 	}
 	bool MySQL::query(String sql) {
 		if (res != NULL) mysql_free_result(res);
 		if (mysql_query(conn, sql.to_string().c_str()) != 0) {
-			application->logger_out("Error: mistake in SQL");
+			logger->out("Error: mistake in SQL");
 			return false;
 		}
 		return true;
